@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+</head>
+<body>
+    <div class="face">
+        <div class="clock">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand sec-hand"></div>
+            <div class="mid"></div>
+        </div>
+    </div>
+
+    <style>
+       *{
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       body{
+           display: flex;
+           height: 100vh;
+           justify-content: center;
+           align-items: center;
+           background-color: blue;
+       }
+       .face{
+           /* border: 5px solid red; */
+
+       }
+       .clock{
+           width: 420Px;
+           height: 420px;
+           border: 8px solid black;
+           border-radius: 50%;
+           position: relative;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           background: rgb(212, 212, 212);
+       }
+       .hand{
+           width:180px;
+           height:5px;
+           background: linear-gradient(to top right, #000099 0%, #ff6600 100%);
+           position: absolute;
+           top: 50%;
+           left: 20px;
+           transform-origin: 100%;
+           transform:rotate(90deg);
+           transition: all 0.05s;
+           border-radius: 20px 0 0 20px;
+           
+           transition-timing-function: cubic-bezier(0, 2.43, 0.58, 1);
+       }
+       .hour-hand{
+           width: 150px;
+           left: 50px;
+           background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+       }
+       .min-hand{
+           width: 170px;
+           left: 30px;
+           background: linear-gradient(to left, #33cc33 0%, #ff6600 100%);
+       }
+       .mid{
+           width: 30px;
+           height: 30px;
+           background:rgb(173, 172, 172);
+           border-radius: 50%;
+           z-index: 10000;
+       }
+    </style>
+    <script>
+        const secHand =document.querySelector('.sec-hand');
+        const minHand =document.querySelector('.min-hand');
+        const hourHand =document.querySelector('.hour-hand');
+        function setDate(){
+            const now = new Date();
+            const second=now.getSeconds();
+            const secondDeg= (((second)/60)*360)+90;
+            secHand.style.transform=`rotate(${secondDeg}deg)`;
+            const min = now.getMinutes();
+            const minDeg = (((min)/60)*360)+90;
+            minHand.style.transform=`rotate(${minDeg}deg)`;
+            const hour = now.getHours();
+            const hourDeg = (((hour)/60)*360)+90;
+            hourHand.style.transform=`rotate(${hourDeg}deg)`;
+            }
+        setInterval(setDate, 1000);
+    </script>
+</body>
+</html>
